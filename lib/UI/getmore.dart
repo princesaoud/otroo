@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otroo/UI/loginsignup.dart';
 import 'package:otroo/UI/main_ui.dart';
 
 class GetMore extends StatefulWidget {
@@ -100,6 +101,10 @@ class _GetMoreState extends State<GetMore> {
               onPressed: () {
                 //TODO: ADD REDIRECT TO THE ACCOUNT PAGE
 //                Navigator.of(context).pushNamed();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginSignup()),
+                );
               },
             ),
             IconButton(

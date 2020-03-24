@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:otroo/UI/getmore.dart';
 import 'package:otroo/UI/main_ui.dart';
 
@@ -9,12 +10,24 @@ class LoginSignup extends StatefulWidget {
 }
 
 class _LoginSignupState extends State<LoginSignup> {
+  bool isLoggedIn = false;
+
   @override
   Widget build(BuildContext context) {
     const padding = 25.0;
-
+    if (this.isLoggedIn == false)
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Hi, Youssouf!'),
+        ),
+        body: Container(
+          child: Text('Welcome Back here you will see all of your Bookings'),
+        ),
+      );
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: Container(),
         title: Text('Authenitification'),
       ),
       body: Container(
@@ -35,7 +48,28 @@ class _LoginSignupState extends State<LoginSignup> {
 //                GoogleSignInButton(onPressed: () {}),
                 GoogleSignInButton(onPressed: () {}, darkMode: true),
                 SizedBox(height: padding),
-                FacebookSignInButton(onPressed: () {}),
+                FacebookSignInButton(onPressed: () async {
+                  final facebookLogin = FacebookLogin();
+                  final result =
+                      await facebookLogin.logInWithReadPermissions(['email']);
+
+                  switch (result.status) {
+                    case FacebookLoginStatus.loggedIn:
+                      print(result.accessToken.token);
+                      //TODO: Send the token to sever and save user informations as well
+//                      _sendTokenToServer(result.accessToken.token);
+//                      _showLoggedInUI();
+                      break;
+                    case FacebookLoginStatus.cancelledByUser:
+                      print('Cancelled');
+//                      _showCancelledMessage();
+                      break;
+                    case FacebookLoginStatus.error:
+                      print(result.errorMessage);
+//                      _showErrorOnUI(result.errorMessage);
+                      break;
+                  }
+                }),
 //                SizedBox(height: padding),
 //                TwitterSignInButton(onPressed: () {}),
 //                SizedBox(height: padding),
@@ -48,6 +82,12 @@ class _LoginSignupState extends State<LoginSignup> {
       ),
       bottomNavigationBar: _bottomNavBar(context),
     );
+  }
+
+  void onLoginStatusChanged(bool isLoggedIn) {
+    setState(() {
+      this.isLoggedIn = isLoggedIn;
+    });
   }
 
   Widget _bottomNavBar(BuildContext context) {
@@ -91,7 +131,7 @@ class _LoginSignupState extends State<LoginSignup> {
               onPressed: () {
                 //TODO: ADD REDIRECT TO THE ACCOUNT PAGE
 //                Navigator.of(context).pushNamed();
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => LoginSignup()),
                 );

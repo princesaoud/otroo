@@ -401,7 +401,7 @@ class _MainUIState extends State<MainUI> {
                   iconSize: 30,
                   onPressed: () {
                     //TODO: ADD REDIRECT TO THE SEARCH PAGE
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => MainUI()),
                     );
