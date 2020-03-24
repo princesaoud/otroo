@@ -5,6 +5,7 @@ import 'package:otroo/Model/productModel.dart';
 import 'package:otroo/UI/Widgets/custom_shape.dart';
 import 'package:otroo/UI/Widgets/mainui_customcard.dart';
 import 'package:otroo/UI/getmore.dart';
+import 'package:otroo/UI/loginsignup.dart';
 
 class MainUI extends StatefulWidget {
   @override
@@ -418,6 +419,10 @@ class _MainUIState extends State<MainUI> {
               onPressed: () {
                 //TODO: ADD REDIRECT TO THE ACCOUNT PAGE
 //                Navigator.of(context).pushNamed();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginSignup()),
+                );
               },
             ),
             IconButton(

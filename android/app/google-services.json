@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "48731855395",
+    "firebase_url": "https://otro-6c7d3.firebaseio.com",
+    "project_id": "otro-6c7d3",
+    "storage_bucket": "otro-6c7d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48731855395:android:57cb04e330189eda2def96",
+        "android_client_info": {
+          "package_name": "com.example.otroo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48731855395-6sa53o0s6begdg73rsr0iciprlo1hcjd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0vGEqAtgDy2wqsnw9srOvUgHY9T3kdGU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48731855395-6sa53o0s6begdg73rsr0iciprlo1hcjd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48731855395:android:50400df904f2d5382def96",
+        "android_client_info": {
+          "package_name": "com.princesaoud.otro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48731855395-6sa53o0s6begdg73rsr0iciprlo1hcjd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0vGEqAtgDy2wqsnw9srOvUgHY9T3kdGU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48731855395-6sa53o0s6begdg73rsr0iciprlo1hcjd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
