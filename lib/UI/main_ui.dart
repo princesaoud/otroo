@@ -599,6 +599,7 @@ class _MainUIState extends State<MainUI> {
                   ),
                 ),
                 Container(
+                  height: 40,
                   width: double.infinity,
                   child: FlatButton(
                     shape: RoundedRectangleBorder(
