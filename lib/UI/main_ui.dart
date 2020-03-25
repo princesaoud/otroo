@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 import 'package:otroo/Model/categoryModel.dart';
 import 'package:otroo/Model/productModel.dart';
 import 'package:otroo/UI/Widgets/custom_shape.dart';
@@ -22,6 +23,14 @@ class _MainUIState extends State<MainUI> {
   List<Product> dealsListItems;
   double _height;
   double _width;
+  final controllerDate = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    controllerDate.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -492,20 +501,64 @@ class _MainUIState extends State<MainUI> {
             borderRadius: BorderRadius.circular(30.0),
             elevation: 8,
             child: Container(
-              child: TextFormField(
-                cursorColor: Colors.orange[200],
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(10),
-                  prefixIcon:
-                      Icon(Icons.search, color: Colors.orange[200], size: 30),
-                  hintText: "What're you looking for?",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: BorderSide.none),
+                child: Container(
+                    child: Column(
+              children: <Widget>[
+                Container(
+                  child: TextFormField(
+                    cursorColor: Colors.orange[200],
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(10),
+                      prefixIcon: Icon(Icons.search,
+                          color: Colors.orange[200], size: 30),
+                      hintText: "What're you looking for?",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                          borderSide: BorderSide.none),
+                    ),
+                  ),
                 ),
-              ),
-            ),
+                //TODO: add divider
+
+                Container(
+                  child: TextFormField(
+                    controller: controllerDate,
+                    onTap: () async {
+                      print('date picker clicked');
+                      DateTime newDateTime = await showRoundedDatePicker(
+                        context: context,
+                        theme: ThemeData(primarySwatch: Colors.pink),
+                        onTapDay: (DateTime dateTime, bool isSelected) {
+                          print(dateTime);
+                          controllerDate.text =
+                              '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+                          return true;
+                        },
+                      );
+
+                      setState(() {
+                        String date =
+                            '${newDateTime.day}/${newDateTime.month}/${newDateTime.year}';
+                        controllerDate.text = date;
+                        print('the date is $date');
+                      });
+                    },
+                    cursorColor: Colors.orange[200],
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(10),
+                      prefixIcon: Icon(Icons.calendar_today,
+                          color: Colors.orange[200], size: 30),
+                      hintText: "Date",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                          borderSide: BorderSide.none),
+                    ),
+                  ),
+                )
+              ],
+            ))),
           ),
         ),
 //        Container(

@@ -15,14 +15,19 @@ class _LoginSignupState extends State<LoginSignup> {
   @override
   Widget build(BuildContext context) {
     const padding = 25.0;
-    if (this.isLoggedIn == false)
+    if (this.isLoggedIn == true)
       return Scaffold(
         appBar: AppBar(
+          leading: Container(),
           title: Text('Hi, Youssouf!'),
         ),
         body: Container(
-          child: Text('Welcome Back here you will see all of your Bookings'),
+          child: Text(
+            'Welcome Back here you will see all of your Bookings',
+            style: TextStyle(fontSize: 25),
+          ),
         ),
+        bottomNavigationBar: _bottomNavBar(context),
       );
     return Scaffold(
       appBar: AppBar(
@@ -56,6 +61,7 @@ class _LoginSignupState extends State<LoginSignup> {
                   switch (result.status) {
                     case FacebookLoginStatus.loggedIn:
                       print(result.accessToken.token);
+                      onLoginStatusChanged(true);
                       //TODO: Send the token to sever and save user informations as well
 //                      _sendTokenToServer(result.accessToken.token);
 //                      _showLoggedInUI();

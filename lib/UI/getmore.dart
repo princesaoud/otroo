@@ -25,7 +25,7 @@ class _GetMoreState extends State<GetMore> {
                 padding: EdgeInsets.only(top: _height / 20),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.orange[200], Colors.pinkAccent],
+                    colors: [Colors.red[200], Colors.redAccent],
                   ),
                 ),
                 child: ListTile(
@@ -38,21 +38,29 @@ class _GetMoreState extends State<GetMore> {
                     radius: 30,
                     backgroundColor: Colors.white,
                   ),
-                  title: Text("FlutterDevs"),
+                  title: Text("Otroo"),
                   subtitle: Text(
-                    "flutterDevs@aeologic.com",
+                    "info@otroo.com",
                     style: TextStyle(fontSize: 13),
                   ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.black,
-                  ),
+//                  trailing: Icon(
+//                    Icons.arrow_forward_ios,
+//                    color: Colors.black,
+//                  ),
                 ),
               ),
             ),
             ListTile(
               leading: Icon(Icons.payment),
               title: Text("Orders & Payments"),
+            ),
+            ListTile(
+              leading: Icon(Icons.save),
+              title: Text("Favoris"),
+            ),
+            ListTile(
+              leading: Icon(Icons.assistant),
+              title: Text("Customer Care"),
             ),
           ],
         ),
