@@ -36,6 +36,9 @@ class _LoginSignupState extends State<LoginSignup> {
         title: Text('Authenitification'),
       ),
       body: Container(
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.fromLTRB(60, 0, 0, 0),
+        width: 300,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -47,35 +50,44 @@ class _LoginSignupState extends State<LoginSignup> {
 //                AppleSignInButton(onPressed: () {}),
 //                AppleSignInButton(
 //                    onPressed: () {}, style: AppleButtonStyle.whiteOutline),
-                AppleSignInButton(
-                    onPressed: () {}, style: AppleButtonStyle.black),
+                Container(
+                  width: double.infinity,
+                  child: AppleSignInButton(
+                      onPressed: () {}, style: AppleButtonStyle.black),
+                ),
                 SizedBox(height: padding),
 //                GoogleSignInButton(onPressed: () {}),
-                GoogleSignInButton(onPressed: () {}, darkMode: true),
+                Container(
+                    width: double.infinity,
+                    child:
+                        GoogleSignInButton(onPressed: () {}, darkMode: true)),
                 SizedBox(height: padding),
-                FacebookSignInButton(onPressed: () async {
-                  final facebookLogin = FacebookLogin();
-                  final result =
-                      await facebookLogin.logInWithReadPermissions(['email']);
+                Container(
+                  width: double.infinity,
+                  child: FacebookSignInButton(onPressed: () async {
+                    final facebookLogin = FacebookLogin();
+                    final result =
+                        await facebookLogin.logInWithReadPermissions(['email']);
 
-                  switch (result.status) {
-                    case FacebookLoginStatus.loggedIn:
-                      print(result.accessToken.token);
-                      onLoginStatusChanged(true);
-                      //TODO: Send the token to sever and save user informations as well
+                    switch (result.status) {
+                      case FacebookLoginStatus.loggedIn:
+                        print(result.accessToken.token);
+                        onLoginStatusChanged(true);
+                        //TODO: Send the token to sever and save user informations as well
 //                      _sendTokenToServer(result.accessToken.token);
 //                      _showLoggedInUI();
-                      break;
-                    case FacebookLoginStatus.cancelledByUser:
-                      print('Cancelled');
+                        break;
+                      case FacebookLoginStatus.cancelledByUser:
+                        print('Cancelled');
 //                      _showCancelledMessage();
-                      break;
-                    case FacebookLoginStatus.error:
-                      print(result.errorMessage);
+                        break;
+                      case FacebookLoginStatus.error:
+                        print(result.errorMessage);
 //                      _showErrorOnUI(result.errorMessage);
-                      break;
-                  }
-                }),
+                        break;
+                    }
+                  }),
+                ),
 //                SizedBox(height: padding),
 //                TwitterSignInButton(onPressed: () {}),
 //                SizedBox(height: padding),

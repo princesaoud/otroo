@@ -23,11 +23,15 @@ class _MainUIState extends State<MainUI> {
   List<Product> dealsListItems;
   double _height;
   double _width;
-  final controllerDate = TextEditingController();
+  final controllerDateFrom = TextEditingController();
+  final controllerDateTo = TextEditingController();
+  DateTime fistdate, lastdate;
+
   @override
   void dispose() {
     // TODO: implement dispose
-    controllerDate.dispose();
+    controllerDateFrom.dispose();
+    controllerDateTo.dispose();
     super.dispose();
   }
 
@@ -521,9 +525,10 @@ class _MainUIState extends State<MainUI> {
                 ),
                 //TODO: add divider
 
+                //TODO: add date
                 Container(
                   child: TextFormField(
-                    controller: controllerDate,
+                    controller: controllerDateFrom,
                     onTap: () async {
                       print('date picker clicked');
                       DateTime newDateTime = await showRoundedDatePicker(
@@ -531,7 +536,7 @@ class _MainUIState extends State<MainUI> {
                         theme: ThemeData(primarySwatch: Colors.pink),
                         onTapDay: (DateTime dateTime, bool isSelected) {
                           print(dateTime);
-                          controllerDate.text =
+                          controllerDateFrom.text =
                               '${dateTime.day}/${dateTime.month}/${dateTime.year}';
                           return true;
                         },
@@ -540,7 +545,7 @@ class _MainUIState extends State<MainUI> {
                       setState(() {
                         String date =
                             '${newDateTime.day}/${newDateTime.month}/${newDateTime.year}';
-                        controllerDate.text = date;
+                        controllerDateFrom.text = date;
                         print('the date is $date');
                       });
                     },
@@ -550,13 +555,70 @@ class _MainUIState extends State<MainUI> {
                       contentPadding: EdgeInsets.all(10),
                       prefixIcon: Icon(Icons.calendar_today,
                           color: Colors.orange[200], size: 30),
-                      hintText: "Date",
+                      hintText: "From",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30.0),
                           borderSide: BorderSide.none),
                     ),
                   ),
-                )
+                ),
+                Container(
+                  child: TextFormField(
+                    controller: controllerDateTo,
+                    onTap: () async {
+                      print('date picker clicked');
+                      DateTime newDateTime = await showRoundedDatePicker(
+                        context: context,
+                        theme: ThemeData(primarySwatch: Colors.pink),
+                        onTapDay: (DateTime dateTime, bool isSelected) {
+                          print(dateTime);
+                          controllerDateTo.text =
+                              '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+                          return true;
+                        },
+                      );
+
+                      setState(() {
+                        String date =
+                            '${newDateTime.day}/${newDateTime.month}/${newDateTime.year}';
+                        controllerDateTo.text = date;
+                        print('the date is $date');
+                      });
+                    },
+                    cursorColor: Colors.orange[200],
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(10),
+                      prefixIcon: Icon(Icons.calendar_today,
+                          color: Colors.orange[200], size: 30),
+                      hintText: "To",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                          borderSide: BorderSide.none),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  child: FlatButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.orange)),
+                    color: Colors.orange,
+                    textColor: Colors.white,
+                    disabledColor: Colors.grey,
+                    disabledTextColor: Colors.black,
+                    padding: EdgeInsets.all(8.0),
+                    splashColor: Colors.blueAccent,
+                    onPressed: () {
+                      /*...*/
+                    },
+                    child: Text(
+                      "Search",
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  ),
+                ),
               ],
             ))),
           ),
