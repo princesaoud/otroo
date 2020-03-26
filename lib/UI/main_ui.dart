@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
@@ -532,17 +533,32 @@ class _MainUIState extends State<MainUI> {
                     onTap: () async {
                       print('date picker clicked');
                       DateTime newDateTime = await showRoundedDatePicker(
+                        firstDate: DateTime.now(),
                         context: context,
-                        theme: ThemeData(primarySwatch: Colors.pink),
-                        onTapDay: (DateTime dateTime, bool isSelected) {
-                          print(dateTime);
-                          controllerDateFrom.text =
-                              '${dateTime.day}/${dateTime.month}/${dateTime.year}';
-                          return true;
+                        onTapDay: (DateTime dateTime, bool available) {
+                          if (!available) {
+                            showDialog(
+                                context: context,
+                                builder: (c) => CupertinoAlertDialog(
+                                      title:
+                                          Text("This date cannot be selected."),
+                                      actions: <Widget>[
+                                        CupertinoDialogAction(
+                                          child: Text("OK"),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                        )
+                                      ],
+                                    ));
+                          }
+                          return available;
                         },
+                        theme: ThemeData(primarySwatch: Colors.pink),
                       );
 
                       setState(() {
+                        this.fistdate = newDateTime;
                         String date =
                             '${newDateTime.day}/${newDateTime.month}/${newDateTime.year}';
                         controllerDateFrom.text = date;
@@ -566,15 +582,32 @@ class _MainUIState extends State<MainUI> {
                   child: TextFormField(
                     controller: controllerDateTo,
                     onTap: () async {
-                      print('date picker clicked');
+                      print('date to picker clicked');
                       DateTime newDateTime = await showRoundedDatePicker(
                         context: context,
+                        initialDate: DateTime(this.fistdate.year,
+                            this.fistdate.month, this.fistdate.day + 2),
+                        firstDate: DateTime(this.fistdate.year,
+                            this.fistdate.month, this.fistdate.day + 1),
                         theme: ThemeData(primarySwatch: Colors.pink),
-                        onTapDay: (DateTime dateTime, bool isSelected) {
-                          print(dateTime);
-                          controllerDateTo.text =
-                              '${dateTime.day}/${dateTime.month}/${dateTime.year}';
-                          return true;
+                        onTapDay: (DateTime dateTime, bool available) {
+                          if (!available) {
+                            showDialog(
+                                context: context,
+                                builder: (c) => CupertinoAlertDialog(
+                                      title:
+                                          Text("This date cannot be selected."),
+                                      actions: <Widget>[
+                                        CupertinoDialogAction(
+                                          child: Text("OK"),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                        )
+                                      ],
+                                    ));
+                          }
+                          return available;
                         },
                       );
 
